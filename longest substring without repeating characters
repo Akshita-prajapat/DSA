@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    int longestUniqueSubstr(string &s) {
+        // code here
+        unordered_set<char> seen;
+        int right = 0; int left = 0; int maxlen = 0;
+        while(right < s.length()){
+            if(seen.find(s[right]) == seen.end()){
+                seen.insert(s[right++]);
+                maxlen = max(maxlen , right - left);
+            }else{
+                seen.erase(s[left++]);
+            }
+        }
+        return maxlen;
+    }
+};
