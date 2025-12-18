@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    Node* delPos(Node* head, int x) {
+        if( head == NULL) return head;
+        
+        Node* temp = head;
+        int cnt = 1;
+
+        // x-th position tak pahunchna
+        while (temp != NULL && cnt < x) {
+            temp = temp->next;
+            cnt++;
+        }
+         
+         if(temp -> prev != NULL){
+             temp -> prev -> next = temp -> next;
+         }
+         else head = temp -> next;
+         
+         if(temp -> next != NULL){
+            temp -> next -> prev = temp -> prev;
+         }
+        delete temp;
+        return head;
+    }
+};
