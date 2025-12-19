@@ -1,0 +1,46 @@
+class myStack {
+    
+    Node* top;
+    int sz;
+    
+  public:
+    myStack() {
+        // Initialize your data members
+        top = NULL;
+        sz = 0;
+    }
+
+    bool isEmpty() {
+        // check if the stack is empty
+        return top == NULL;
+    }
+
+    void push(int x) {
+        // Adds an element x at the top of the stack
+        Node* newNode = new Node(x);
+        newNode -> next  = top;
+        top = newNode;
+        sz++;
+    }
+
+    void pop() {
+        // Removes the top element of the stack
+        if(top == NULL) return;
+        Node* temp = top;
+        top = top -> next;
+        delete temp;
+        sz--;
+    }
+
+    int peek() {
+        // Returns the top element of the stack
+        // If stack is empty, return -1
+        if(top == NULL) return -1;
+        return top -> data;
+    }
+
+    int size() {
+        // Returns the current size of the stack.
+        return sz;
+    }
+};
