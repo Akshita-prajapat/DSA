@@ -1,0 +1,51 @@
+class SpecialStack {
+    int *arr;
+    int *minArr;
+    int top;
+    int minTop;
+    int cap;
+
+public:
+    SpecialStack() {
+        cap = 1000;
+        arr = new int[cap];
+        minArr = new int[cap];
+        top = -1;
+        minTop = -1;
+    }
+
+    void push(int x) {
+        if (top == cap - 1) return;
+
+        arr[++top] = x;
+
+        if (minTop == -1 || x <= minArr[minTop]) {
+            minArr[++minTop] = x;
+        }
+    }
+
+    void pop() {
+        if (top == -1) return;
+
+        if (arr[top] == minArr[minTop]) {
+            minTop--;
+        }
+        top--;
+    }
+
+    int peek() {
+        if (top == -1) return -1;
+        return arr[top];
+    }
+
+    bool isEmpty() {
+        return top == -1;
+    }
+
+    int getMin() {
+        if (minTop == -1) return -1;
+        return minArr[minTop];
+    }
+};
+
+
