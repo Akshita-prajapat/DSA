@@ -1,0 +1,46 @@
+class Solution {
+public:
+    
+    // helper: find minimum value node
+    TreeNode* minValueNode(TreeNode* root) {
+        while (root->left != NULL)
+            root = root->left;
+        return root;
+    }
+
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        // base case
+        if (root == NULL) 
+            return NULL;
+
+        // search in left subtree
+        if (key < root->val) {
+            root->left = deleteNode(root->left, key);
+        }
+        // search in right subtree
+        else if (key > root->val) {
+            root->right = deleteNode(root->right, key);
+        }
+        // node found
+        else {
+            // case 1 & 2: 0 or 1 child
+            if (root->left == NULL) {
+                TreeNode* temp = root->right;
+                delete root;
+                return temp;
+            }
+            else if (root->right == NULL) {
+                TreeNode* temp = root->left;
+                delete root;
+                return temp;
+            }
+
+            // case 3: two children
+            TreeNode* temp = minValueNode(root->right);
+            root->val = temp->val;
+            root->right = deleteNode(root->right, temp->val);
+        }
+
+        return root;
+    }
+};
