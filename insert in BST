@@ -1,0 +1,18 @@
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(root == NULL) return new TreeNode(val);
+
+        //value choti hai to left subtree me insert
+        if(val < root -> val){
+            root -> left = insertIntoBST(root -> left , val);
+        }
+
+        //value bdi hai to right subtree me insert
+        else if(val > root -> val){
+            root -> right = insertIntoBST(root -> right , val);
+        }
+        
+        return root;
+    }
+};
