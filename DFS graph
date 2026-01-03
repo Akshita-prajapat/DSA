@@ -1,0 +1,21 @@
+class Solution {
+  public:
+  void dfsHelper(int src , vector<vector<int>>& adj , vector<bool> &visited, vector<int> &ans){
+      visited[src] = true;
+      ans.push_back(src);
+      
+      for(int neigh : adj[src]){
+          if(!visited[neigh]){
+              dfsHelper(neigh, adj, visited, ans);
+          }
+      }
+  }
+    vector<int> dfs(vector<vector<int>>& adj) {
+        int v = adj.size();
+        vector<int> ans;
+        vector<bool> visited(v , false);
+        
+        dfsHelper(0 , adj , visited , ans);
+        return ans;
+    }
+};
