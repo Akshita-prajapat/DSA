@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string cycleDetection(vector<vector<int>>& edges, int n, int m)
+{
+    vector<vector<int>> adj(n + 1);
+
+    // build graph
+    for (auto &e : edges) {
+        int u = e[0];
+        int v = e[1];
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<bool> visited(n + 1, false);
+
+    for (int i = 1; i <= n; i++) {
+
+        if (!visited[i]) {
+
+            queue<pair<int,int>> q;
+            q.push({i, -1});
+            visited[i] = true;
+
+            while (!q.empty()) {
+
+                int node = q.front().first;
+                int parent = q.front().second;
+                q.pop();
+
+                for (int neigh : adj[node]) {
+
+                    if (!visited[neigh]) {
+                        visited[neigh] = true;
+                        q.push({neigh, node});
+                    }
+                    else if (neigh != parent) {
+                        return "Yes";  // cycle found
+                    }
+                }
+            }
+        }
+    }
+    return "No";
+}
