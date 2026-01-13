@@ -17,6 +17,7 @@ class Solution {
                     ten--;
                     five--;
                 }
+//agar 3 fives ke note hai
                  else if (five >= 3) {
                     five -= 3;
                 }
