@@ -22,7 +22,7 @@ class Solution {
                 }
                 //pop the '('
                 if(!st.empty()) st.pop();
-                //no operator -> not redundant
+                //no operator -> redundant
                 if(!hasOperator) return true;
         }
         }
