@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    bool checkRedundancy(string &s) {
+        stack<char> st;
+        
+        //pushing everything except closing bracket into the stack
+        for(char ch : s){
+            if( ch != ')'){
+                st.push(ch);
+            }
+            else {
+                bool hasOperator = false;
+                
+                //pop till opening bracket
+                while(!st.empty() && st.top() != '('){
+                    char top = st.top();
+                    st.pop();
+                    
+                    if(top == '+' || top == '-' || top =='*' || top == '/'){
+                        hasOperator = true;
+                    }
+                }
+                //pop the '('
+                if(!st.empty()) st.pop();
+                //no operator -> not redundant
+                if(!hasOperator) return true;
+        }
+        }
+        return false;
+        
+    }
+};
