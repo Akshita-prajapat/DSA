@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    vector<int> nextFreqGreater(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> result(n);
+        //hashmap to store frequency of elements
+        unordered_map<int , int> freq;
+        for(int x : arr){
+            freq[x]++;
+        }
+        
+        //stack to stoe elements
+        stack<int> st;
+        for(int i = n-1 ; i>= 0 ; i--){
+            // Remove elements with frequency <= current element
+            while(!st.empty() && freq[st.top()] <= freq[arr[i]]){
+                st.pop();
+            }
+            //assign result
+            if(st.empty()) result[i] = -1;
+            else result[i] = st.top();
+            //push current element
+            st.push(arr[i]);
+        }
+            return result;
+    }
+};
