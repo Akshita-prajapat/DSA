@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int maxOnes(vector<int>& arr, int k) {
+        int left = 0;
+        int countZero = 0;
+        int maxlen = 0;
+        for(int right = 0; right < arr.size(); right++){
+            if(arr[right] == 0){
+                countZero++;
+            }
+            while(countZero > k){
+                if(arr[left] == 0)countZero--;
+                left++;
+            }
+            maxlen = max(maxlen , right-left + 1);
+        }
+        return maxlen;
+    }
+};
