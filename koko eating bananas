@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int kokoEat(vector<int>& arr, int k) {
+        int low = 1, high = *max_element(arr.begin(), arr.end());
+        
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            long long hours = 0;
+
+            for (int x : arr)
+                hours += (x + mid - 1) / mid; // ceil(x / mid)
+
+            if (hours <= k)
+                high = mid;     // try smaller speed
+            else
+                low = mid + 1;  // need more speed
+        }
+        return low;
+    }
+};
